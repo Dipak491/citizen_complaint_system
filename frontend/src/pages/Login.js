@@ -33,12 +33,14 @@ export default function Login() {
     <div className="auth-wrapper">
       <div className="auth-card">
         <div className="auth-logo">
-          <h1>🏛️ Citizen Complaint System</h1>
-          <p>Trinity Academy of Engineering, Pune</p>
+          <span className="chakra-symbol">☸</span>
+          <h1>नागरिक तक्रार प्रणाली</h1>
+          <div className="auth-logo-mr">Citizen Complaint Management System</div>
+          <p>महाराष्ट्र शासन | Government of Maharashtra</p>
         </div>
 
-        <h2 className="auth-title">Welcome Back</h2>
-        <p className="auth-subtitle">Sign in to your account</p>
+        <h2 className="auth-title">स्वागत आहे / Welcome Back</h2>
+        <p className="auth-subtitle">तुमच्या खात्यात साइन इन करा / Sign in to your account</p>
 
         {error && <div className="alert alert-error">{error}</div>}
 

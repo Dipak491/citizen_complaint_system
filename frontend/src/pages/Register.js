@@ -36,12 +36,14 @@ export default function Register() {
     <div className="auth-wrapper">
       <div className="auth-card">
         <div className="auth-logo">
-          <h1>🏛️ Citizen Complaint System</h1>
-          <p>Trinity Academy of Engineering, Pune</p>
+          <span className="chakra-symbol">☸</span>
+          <h1>नागरिक तक्रार प्रणाली</h1>
+          <div className="auth-logo-mr">Citizen Complaint Management System</div>
+          <p>महाराष्ट्र शासन | Government of Maharashtra</p>
         </div>
 
-        <h2 className="auth-title">Create Account</h2>
-        <p className="auth-subtitle">Register to submit complaints</p>
+        <h2 className="auth-title">नोंदणी करा / Create Account</h2>
+        <p className="auth-subtitle">तक्रारी सादर करण्यासाठी नोंदणी करा / Register to submit complaints</p>
 
         {error   && <div className="alert alert-error">{error}</div>}
         {success && <div className="alert alert-success">{success}</div>}
