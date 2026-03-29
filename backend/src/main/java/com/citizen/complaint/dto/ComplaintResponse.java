@@ -2,6 +2,7 @@ package com.citizen.complaint.dto;
 
 import com.citizen.complaint.entity.Category;
 import com.citizen.complaint.entity.Complaint;
+import java.time.LocalDateTime;
 
 public class ComplaintResponse {
 
@@ -12,6 +13,8 @@ public class ComplaintResponse {
     private String status;
     private String citizenName;
     private String citizenEmail;
+    private LocalDateTime createdAt;   // ✅ NEW
+    private LocalDateTime updatedAt;   // ✅ NEW
 
     public ComplaintResponse() {}
 
@@ -24,6 +27,8 @@ public class ComplaintResponse {
         res.setStatus(c.getStatus());
         res.setCitizenName(c.getUser().getName());
         res.setCitizenEmail(c.getUser().getEmail());
+        res.setCreatedAt(c.getCreatedAt());     // ✅ NEW
+        res.setUpdatedAt(c.getUpdatedAt());     // ✅ NEW
         return res;
     }
 
@@ -47,4 +52,10 @@ public class ComplaintResponse {
 
     public String getCitizenEmail() { return citizenEmail; }
     public void setCitizenEmail(String citizenEmail) { this.citizenEmail = citizenEmail; }
+
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
 }

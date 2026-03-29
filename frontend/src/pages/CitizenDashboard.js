@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { submitComplaint, getMyComplaints } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import Navbar from '../components/Navbar';
+import { formatDate, timeAgo } from '../utils/dateUtils';  // ✅ add this import
+
 
 const CATEGORIES = ['ROAD', 'WATER', 'ELECTRICITY', 'SANITATION'];
 
@@ -159,19 +161,34 @@ export default function CitizenDashboard() {
                 <p>Click "Submit New Complaint" to report a civic issue.</p>
               </div>
             ) : (
-              complaints.map(c => (
-                <div className="complaint-item" key={c.id}>
-                  <div className="complaint-header">
-                    <span className="complaint-title">{c.title}</span>
-                    <div className="complaint-badges">
-                      {categoryBadge(c.category)}
-                      {statusBadge(c.status)}
-                    </div>
-                  </div>
-                  <p className="complaint-description">{c.description}</p>
-                  <span className="complaint-meta">Complaint #{c.id}</span>
-                </div>
-              ))
+             complaints.map(c => (
+  <div className="complaint-item" key={c.id}>
+    <div className="complaint-header">
+      <span className="complaint-title">{c.title}</span>
+      <div className="complaint-badges">
+        {categoryBadge(c.category)}
+        {statusBadge(c.status)}
+      </div>
+    </div>
+    <p className="complaint-description">{c.description}</p>
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
+      <span className="complaint-meta">Complaint #{c.id}</span>
+      <div style={{ display: 'flex', gap: '1rem', fontSize: '0.78rem', color: '#A0AEC0' }}>
+        {/* ✅ Submitted time */}
+        <span title={formatDate(c.createdAt)}>
+          🕐 Submitted: {timeAgo(c.createdAt)}
+        </span>
+        {/* ✅ Last updated time — only show if different from created */}
+        {c.updatedAt !== c.createdAt && (
+          <span title={formatDate(c.updatedAt)}>
+            🔄 Updated: {timeAgo(c.updatedAt)}
+          </span>
+        )}
+      </div>
+    </div>
+  </div>
+))
+
             )}
           </div>
         )}

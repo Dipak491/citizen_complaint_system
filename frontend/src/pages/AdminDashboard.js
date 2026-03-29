@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { getAllComplaints, updateComplaintStatus, deleteComplaint } from '../services/api';
 import Navbar from '../components/Navbar';
+import { formatDate, timeAgo } from '../utils/dateUtils';  // ✅ add this import
+
 
 const STATUSES = ['PENDING', 'IN_PROGRESS', 'RESOLVED'];
 
@@ -182,6 +184,17 @@ export default function AdminDashboard() {
                           🗑 Delete
                         </button>
                       </td>
+
+
+<td>
+  <div style={{ fontSize: '0.82rem', color: '#4A5568' }}>
+    {formatDate(c.createdAt)}
+  </div>
+  <div style={{ fontSize: '0.75rem', color: '#A0AEC0', marginTop: '0.2rem' }}>
+    {timeAgo(c.createdAt)}
+  </div>
+</td>
+
                     </tr>
                   ))}
                 </tbody>
