@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="cosmetics_product" resource="default" engine="innodb" comment="Cosmetics Products Table">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="varchar" name="sku" nullable="false" length="64" comment="SKU"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Product Name"/>
+        <column xsi:type="varchar" name="category" nullable="false" length="64" comment="Product Category"/>
+        <column xsi:type="decimal" name="price" scale="4" precision="12" unsigned="false" nullable="false" default="0" comment="Price"/>
+        <column xsi:type="int" name="stock" padding="10" unsigned="true" nullable="false" default="0" comment="Stock"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Description"/>
+        <column xsi:type="varchar" name="image" nullable="true" length="255" comment="Image URL"/>
+        <column xsi:type="varchar" name="ingredients" nullable="true" length="255" comment="Ingredients"/>
+        <column xsi:type="varchar" name="usage_instructions" nullable="true" length="255" comment="Usage Instructions"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="COSMETICS_PRODUCT_SKU">
+            <column name="sku"/>
+        </constraint>
+        <index referenceId="COSMETICS_PRODUCT_CATEGORY" indexType="btree">
+            <column name="category"/>
+        </index>
+    </table>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Cosmetics_Products::cosmetics" title="Cosmetics" translate="title" module="Cosmetics_Products" sortOrder="50" resource="Cosmetics_Products::cosmetics"/>
+        <add id="Cosmetics_Products::product" title="Manage Products" translate="title" module="Cosmetics_Products" sortOrder="10" parent="Cosmetics_Products::cosmetics" action="cosmetics/product" resource="Cosmetics_Products::product"/>
+    </menu>
+</config>

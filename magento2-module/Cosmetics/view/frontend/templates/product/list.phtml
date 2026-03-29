@@ -1,0 +1,73 @@
+<?php
+/**
+ * @var \Cosmetics\Products\Block\ProductList $block
+ */
+?>
+<div class="cosmetics-products">
+    <h1 class="page-title"><?= $block->escapeHtml(__('Cosmetics Products')) ?></h1>
+    
+    <div class="filter-container">
+        <div class="category-filter">
+            <label for="category-filter"><?= $block->escapeHtml(__('Filter by Category:')) ?></label>
+            <select id="category-filter">
+                <option value=""><?= $block->escapeHtml(__('All Categories')) ?></option>
+                <?php foreach ($block->getCategories() as $category): ?>
+                    <option value="<?= $block->escapeHtmlAttr($category) ?>">
+                        <?= $block->escapeHtml($category) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+    
+    <div class="products-grid">
+        <?php foreach ($block->getProductCollection() as $product): ?>
+            <div class="product-item" data-category="<?= $block->escapeHtmlAttr($product->getCategory()) ?>">
+                <div class="product-image">
+                    <?php if ($product->getImage()): ?>
+                        <img src="<?= $block->escapeUrl($product->getImage()) ?>" alt="<?= $block->escapeHtmlAttr($product->getName()) ?>" />
+                    <?php else: ?>
+                        <div class="no-image"><?= $block->escapeHtml(__('No Image')) ?></div>
+                    <?php endif; ?>
+                </div>
+                <div class="product-details">
+                    <h2 class="product-name"><?= $block->escapeHtml($product->getName()) ?></h2>
+                    <div class="product-category"><?= $block->escapeHtml($product->getCategory()) ?></div>
+                    <div class="product-price">$<?= $block->escapeHtml(number_format($product->getPrice(), 2)) ?></div>
+                    <div class="product-stock">
+                        <?= $block->escapeHtml(__('In Stock:')) ?> <?= $block->escapeHtml($product->getStock()) ?>
+                    </div>
+                    <?php if ($product->getDescription()): ?>
+                        <div class="product-description">
+                            <?= $block->escapeHtml($product->getDescription()) ?>
+                        </div>
+                    <?php endif; ?>
+                    <button class="action primary add-to-cart">
+                        <?= $block->escapeHtml(__('Add to Cart')) ?>
+                    </button>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    
+    <?= $block->getChildHtml('pager') ?>
+</div>
+
+<script>
+require(['jquery'], function($) {
+    'use strict';
+    
+    $(document).ready(function() {
+        $('#category-filter').on('change', function() {
+            var category = $(this).val();
+            
+            if (category === '') {
+                $('.product-item').show();
+            } else {
+                $('.product-item').hide();
+                $('.product-item[data-category="' + category + '"]').show();
+            }
+        });
+    });
+});
+</script>
